@@ -1,0 +1,9 @@
+image:
+  - Visual Studio 2022
+
+install:
+  - 'C:\Python310\python.exe -m pip install -U pywin32 pyinstaller'
+build_script:
+  - 'C:\Python310\scripts\pyinstaller -F --exclude-module select --exclude-module _bz2 --exclude-module _decimal --exclude-module _lzma  --exclude-module _socket  text2lm-l3.py'
+artifacts:
+  - path: 'dist/*exe'
