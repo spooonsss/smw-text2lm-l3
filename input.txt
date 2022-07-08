@@ -16,6 +16,6 @@ AREA DIRECTOR
 
 
 
-PROGRAM DIRECTOR
+Program Director
 
 2Toshihiko Nakago

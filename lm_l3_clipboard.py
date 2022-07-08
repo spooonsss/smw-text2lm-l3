@@ -8,18 +8,9 @@ put your text in input.txt, run this, then paste in LM layer 3 or credits editor
 rd /s/q dist build
 pyinstaller  lm_l3_clipboard.py
 
+pip install pyinstaller
 
 pyinstaller -F --exclude-module select --exclude-module _bz2 --exclude-module _decimal --exclude-module _lzma  --exclude-module _socket  lm_l3_clipboard.py
-
-
-select.pyd
-unicodedata.pyd
-win32clipboard.pyd
-_bz2.pyd
-_decimal.pyd
-_hashlib.pyd
-_lzma.pyd
-_socket.pyd
 
 
 Lunar Magic OV Tiles v2 notes:
