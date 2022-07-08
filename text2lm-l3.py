@@ -43,7 +43,8 @@ import base64
 def chunker(seq, size):
     return (seq[pos:pos + size] for pos in range(0, len(seq), size))
 
-if True:
+
+def gen_empty_template():
     # print(repr(dir(win32clipboard)))
     win32clipboard.OpenClipboard(None)
     try:
@@ -71,13 +72,12 @@ if True:
     finally:
         # win32clipboard.CloseClipboard()
         pass
-
-
+# gen_empty_template()
 
 
 # print(repr(dir(win32clipboard)))
-win32clipboard.OpenClipboard(None)
-try:
+
+def main(input_filename):
     format = win32clipboard.RegisterClipboardFormat('Lunar Magic OV Tiles v2')
     # empty file is created from all tiles 0xFC pal 6 priority; select all, copy
     # with open('empty', 'rt') as example:
@@ -137,7 +137,7 @@ try:
 
     width = 1
     height = 0
-    with open('input.txt', 'rt') as input:
+    with open(input_filename, 'rt') as input:
         output_pos = 0x80
         for line_no, line in enumerate(input.readlines()):
             line = line.rstrip('\r\n')
@@ -178,11 +178,22 @@ try:
     if height >= 0x80:
         data[0x30:0x30+0x10] = struct.pack('iiii', line_width // 2 * 0x80, line_width, 0x80, 0)
 
-    tiles_length = line_width * (output_pos + 0)
+    # tiles_length = line_width * (output_pos + 0)
     # data[3336 * 0x10:3337 * 0x10 + tiles_length] = b'\x10' * tiles_length
     # data[3336 * 0x10 + tiles_length:] = b'\x00' * (len(data) - 3336 * 0x10 - tiles_length)
 
     data = bytes(data)
     win32clipboard.SetClipboardData(format, data)
-finally:
-    win32clipboard.CloseClipboard()
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description='Convert text to Lunar Magic Layer 3 clipboard')
+    parser.add_argument('--input', default='input.txt')
+    args = parser.parse_args()
+
+    win32clipboard.OpenClipboard(None)
+    try:
+        main(args.input)
+    finally:
+        win32clipboard.CloseClipboard()
