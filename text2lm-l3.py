@@ -5,12 +5,9 @@ put your text in input.txt, run this, then paste in LM layer 3 or credits editor
 
 
 
-rd /s/q dist build
-pyinstaller  lm_l3_clipboard.py
-
 pip install pyinstaller
-
-pyinstaller -F --exclude-module select --exclude-module _bz2 --exclude-module _decimal --exclude-module _lzma  --exclude-module _socket  lm_l3_clipboard.py
+rd /s/q dist build
+pyinstaller -F --exclude-module select --exclude-module _bz2 --exclude-module _decimal --exclude-module _lzma  --exclude-module _socket  text2lm-l3.py
 
 
 Lunar Magic OV Tiles v2 notes:
